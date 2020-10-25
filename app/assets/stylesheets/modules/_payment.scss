@@ -1,0 +1,183 @@
+.payment{
+  width:100vw;
+  margin:0 auto 12vw;
+  padding-bottom:5vw;
+  box-shadow:0 0 10px 0 rgba(0,0,0,0.3);
+  main>*+*{
+    border-top:1px solid whitesmoke;
+    margin:0 auto;
+    width:100%;
+    padding:10vw 5vw;
+  }
+  &Header{
+    display:flex;
+    padding:10vw 0;
+    margin:0 auto;
+    justify-content:space-evenly;
+  }
+  &Detail{
+    display:flex;
+    &Image{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      height:40vw;
+      width:40vw;
+    }
+    &Description{
+      font-size:5vw;
+      margin:auto 0 auto 5vw;
+      line-height:1.4;
+      &--price{
+        text-align:right;
+        font-size:5vw;
+        &>*+*{
+          font-size:5vw;
+          font-weight:bold;
+          margin:0 0 0 2vw;
+        }
+      }
+    }
+  }
+  &Amount{
+    display:flex;
+    justify-content:space-between;
+    &--total{
+      font-size:5vw;
+      font-weight:bold;
+    }
+    &--price{
+      font-size:5vw;
+    }
+  }
+  &Method{
+    padding:0 !important;
+    .card{
+      display:flex;
+      justify-content:space-between;
+      width:100%;
+      padding:10vw 5vw;
+      &_type{
+        font-size:5vw;
+        font-weight:bold;
+      }
+      &_num{
+        font-size:5vw;
+      }
+    }
+  }
+  &Quantity{
+    display:flex;
+    justify-content:space-between;
+    padding:10vw 5vw;
+    span{
+      font-size:5vw;
+      font-weight:bold;
+    }
+    input{
+      display:block;
+      width:50%;
+      height:12vw;
+      margin:0 0 0 auto;
+      text-align:right;
+    }
+  }
+  &Purchase{
+    border-top:1px solid whitesmoke;
+    padding:10vw 5vw;
+    text-align:center;
+    &--button{
+      background:#3CCACE;
+      border:1px solid #3CCACE;
+      color:#fff;
+      display:block;
+      height:12vw;
+      width:60%;
+      font-size:5vw;
+      border-radius:10px;
+      margin:0 auto;
+    }
+  }
+  #new_form{
+    border-top:1px solid whitesmoke;
+    margin:0 auto;
+    padding:0;
+  }
+}
+
+
+
+
+
+@media screen and (min-width:768px) {
+  .payment{
+    width:700px;
+    margin:0 auto 50px;
+    padding-bottom:24px;
+    main>*+*{
+      width:500px;
+      padding:24px 16px;
+    }
+    &Header{
+      padding:30px 0;
+    }
+    &Detail{
+      &Image{
+        height:150px;
+        width:150px;
+      }
+      &Description{
+        font-size:24px;
+        margin:auto 0 auto auto;
+        &--price{
+          font-size:20px;
+          &>*+*{
+            font-size:20px;
+            margin:0 0 0 8px;
+          }
+        }
+      }
+    }
+    &Amount{
+      &--total{
+        font-size:20px;
+      }
+      &--price{
+        font-size:24px;
+      }
+    }
+    &Method{
+      padding:0 !important;
+      .card{
+        width:100%;
+        padding:24px 16px;
+        &_type{
+          font-size:20px;
+        }
+        &_num{
+          font-size:20px;
+        }
+      }
+    }
+    &Quantity{
+      padding:24px 16px;
+      span{
+        font-size:20px;
+      }
+      input{
+        width:200px;
+        height:48px;
+      }
+    }
+    &Purchase{
+      border-top:1px solid whitesmoke;
+      padding:24px 16px;
+      &--button{
+        height:50px;
+        width:60%;
+        font-size:20px;
+        border-radius:10px;
+      }
+    }
+  }
+}

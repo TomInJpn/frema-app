@@ -1,0 +1,34 @@
+.contents__left
+  .contents__left__menu
+    %ul
+      %li マイページ
+      %li お知らせ
+      %li やることリスト
+      %li いいね！一覧
+      %li 出品する
+      %li 下書き一覧
+      %li 出品した商品ー出品中
+      %li 出品した商品ー取引中
+      %li 出品した商品ー売却済み
+      %li 購入した商品ー取引中
+      %li ニュース一覧
+      %li ガイド
+      %li お問い合わせ
+  .contents__left__menu
+    %h3 フリペイ
+    %ul
+      %li 売り上げ・振り込み申請
+      %li ポイント
+  .contents__left__menu
+    %h3 設定
+    %ul
+      %li プロフィール
+      %li 発送元・お届け先住所変更
+      - if current_user&.card
+        %li= link_to "カード情報", new_card_path
+      - else
+        %li= link_to "カード情報登録", new_card_path
+      %li メール/パスワード
+      %li 本人情報
+      %li 電話番号の確認
+      %li= link_to "ログアウト", destroy_user_session_path,method: :delete

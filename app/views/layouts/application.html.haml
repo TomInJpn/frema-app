@@ -1,0 +1,104 @@
+!!!
+%html
+  %head
+    %meta{content:"text/html; charset=UTF-8", "http-equiv":"Content-Type"}
+    %title FremaApp
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag "application", media: "all"
+    = include_gon
+    = javascript_include_tag "application"
+    %meta{content:"width=device-width,initial-scale=1.0",name:"viewport"}
+  %body
+    %header.mainHeader{class:"#{'registrationHeader' if params[:controller]=='users/registrations' or params[:controller]=='users/sessions'}"}
+      %h1.mainHeader__logo= link_to image_tag("logo/logo.png",alt:"フリマ 人生を変えるフリーマーケットアプリ"), root_path
+      - if params[:controller]=="users/registrations"
+        %nav.regiNavi
+          %ul
+            %li{class:"#{'active' unless @address}"} 会員情報
+            %li{class:"#{'active' if session["devise.regist_data"]}"} 送付先情報
+            %li{class:"#{'active' if @address && !session["devise.regist_data"]}"} 完了
+      - elsif (params[:controller]=="items"&&params[:action]=="index") || (params[:action]=="show") || (params[:controller]=="categories")
+        .mainHeader__search
+          %form
+            %input{placeholder:"キーワードから探す",type:"text"}
+            %button
+              =image_tag("icon/icon-search.png",alt:"")
+        %ul.mainHeader__result
+        .mainNavi
+          %ul.mainNaviLeft
+            %span
+            %li.mainNaviLeft__item{ontouchstart:""}
+              =link_to "カテゴリー",categories_path
+              %ul.parents
+                - @categories.each do |category|
+                  %li.parent= link_to"#{category.name}",category_path(category.id),id:"#{category.id}"
+            %li.mainNaviLeft__item{ontouchstart:""}
+              =link_to "ブランド",root_path
+          %ul.mainNaviRight
+            - if current_user
+              %li.mainNaviRight__item= link_to "マイページ", users_show_path(current_user.id)
+            - else
+              %li.mainNaviRight__item= link_to "ログイン",new_user_session_path
+              %li.mainNaviRight__item= link_to "新規会員登録",new_user_registration_path
+        - if params[:controller]=="items"&&params[:action]=="show"
+          %nav.breadcrumbs
+            = link_to "FURIMA",root_path
+            = link_to "カテゴリー一覧",categories_path
+            - @item_ancestors.each do |ancestor|
+              = link_to ancestor.name,category_path(ancestor.id)
+            = link_to @item.category.name,category_path(@item.category.id)
+            %span= @item.name
+        - elsif params[:controller]=="categories"&&params[:action]=="show"
+          %nav.breadcrumbs
+            = link_to "FURIMA",root_path
+            = link_to "カテゴリー一覧",categories_path
+            - @category.ancestors.each do |ancestor|
+              = link_to ancestor.name,category_path(ancestor.id)
+            = link_to @category.name,category_path(@category.id)
+
+
+
+    = yield
+
+
+
+    %footer.mainFooter
+      -if (params[:controller]=="items"&&params[:action]=="index") || (params[:action]=="show")
+        %aside.mainFooterBanner
+          %h2.mainFooterBanner--title
+            だれでもかんたん、人生を変えるフリマアプリ
+          %p.mainFooterBanner--text 今すぐ無料ダウンロード！
+          .mainFooterBanner--btn
+            =link_to image_tag("icon/app-store.svg"),root_path,class:"aBtn"
+            =link_to image_tag("icon/google-play.svg"),root_path,class:"gBtn"
+      %ul.mainFooterContents
+        %li.mainFooterContents__li
+          %h2.mainFooterContents__li--head FURIMAについて
+          %ul
+            %li= link_to "会社概要（運営会社）",root_path
+            %li= link_to "プライバシーポリシー",root_path
+            %li= link_to "FURIMA利用規約",root_path
+            %li= link_to "ポイントに関する特約",root_path
+        %li.mainFooterContents__li
+          %h2.mainFooterContents__li--head FURIMAを見る
+          %ul
+            %li= link_to "カテゴリー一覧",root_path
+            %li= link_to "ブランド一覧",root_path
+        %li.mainFooterContents__li
+          %h2.mainFooterContents__li--head ヘルプ＆ガイド
+          %ul
+            %li= link_to "FURIMAガイド",root_path
+            %li= link_to "FURIMAロゴ利用ガイドライン",root_path
+            %li= link_to "お知らせ",root_path
+      = link_to image_tag("logo/logo-white.png"),root_path,class:"mainFooterLogo"
+      %p © FURIMA
+      -if (params[:controller]=="items"&&params[:action]=="index") || (params[:action]=="show")
+        -if current_user
+          = link_to(new_item_path,class:"purchaseBtn") do
+            %span.purchaseBtn--text 出品する
+            = image_tag("icon/icon_camera.png",class:"purchaseBtn--icon")
+        -else
+          = link_to(root_path,class:"purchaseBtn") do
+            %span.purchaseBtn--text 出品する
+            = image_tag("icon/icon_camera.png",class:"purchaseBtn--icon")

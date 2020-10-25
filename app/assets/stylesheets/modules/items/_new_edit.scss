@@ -1,0 +1,329 @@
+.itemNew,.itemEdit{
+
+  box-shadow:0 0 10px 0 rgba(0,0,0,0.3);
+
+  p[class$="_heading"]{
+    font-weight:bolder;
+  }
+  div[class$="--title"]{
+    display:flex;
+    >span{
+      background:#3CCACE;
+      margin:0 0 0 3vw;
+      padding:1vw;
+      border-radius:2vw;
+      color:#ffffff;
+      font-size:3vw;
+      font-weight:normal;
+    }
+  }
+  input[class$="--input"],select[class$="--select"]{
+    width:100%;
+    height:13vw;
+    margin:1vw 0 0;
+    padding:2vw;
+  }
+  form>div{
+    padding:10vw 5vw;
+    >div{
+      margin:10vw 0 0;
+    }
+  }
+  form>div:nth-last-of-type(n+2){
+    border-bottom:solid 1px #eeeeee;
+  }
+  p[class$="--err"]{
+    color:#ff0000;
+  }
+
+  .item__image{
+    >div{
+      margin:0!important;
+    }
+    &--title{
+      font-weight:bolder;
+    }
+    &--note{
+      font-size:4vw;
+    }
+    &--upload{
+      max-height:calc(60vw + 2px);
+      margin:0 auto;
+      display:flex;
+      flex-wrap:wrap;
+      overflow:hidden;
+      &Box{
+        width:100%;
+        position:relative;
+        overflow:hidden;
+        label{
+          display:block;
+          height:30vw;
+          pointer-events:none;
+          img{
+            width:auto;
+            height:100%;
+            position:absolute;
+            right:50%;
+            transform:translateX(50%);
+          }
+          i{
+            display:none;
+          }
+          input{
+            width:1px;
+            height:1px;
+            position:absolute;
+            bottom:-1px;
+            left:50%;
+            &:focus{
+              outline:#eeeeee;
+            }
+          }
+        }
+        &:last-of-type{
+          background:#eeeeee;
+          font-size:2vw;
+          border:dotted 1px;
+          span{display:none;}
+          label{
+            pointer-events:auto;
+            i{
+              display:inline;
+              font-size:5vw;
+              &::before{
+                position:absolute;
+                top:30%;
+                left:calc(50% - 10px);
+                pointer-events:none;
+              }
+            }
+          }
+          &::before{
+            width:100%;
+            content:'ドラックアンドドロップ\Aまたはクリックしてファイルをアップロード\A\A※画像は横長でお願いします。';
+            white-space:pre;
+            position:absolute;
+            left:0;
+            top:50%;
+            text-align:center;
+            pointer-events:none;
+          }
+        }
+        &:nth-of-type(n+3){
+          &::before{
+            content:'';
+          }
+        }
+        &:nth-of-type(11){
+          display:none;
+        }
+        span{
+          padding:0 1vw;
+          position:absolute;
+          left:0;
+          font-size:3vw;
+          color:#ffffff;
+          border-radius:1vw;
+          cursor:pointer;
+        }
+        .item_image{
+          &--delete{
+            background:#ff0000;
+            top:15%;
+          }
+          &--change{
+            background:#3CCACE;
+            bottom:15%;
+          }
+        }
+        input[type="checkbox"]{
+          display:none;
+        }
+        &_none{
+          display:none;
+        }
+      }
+    }
+  }
+  .item__detail{
+    &_category{
+      display:flex;
+      flex-wrap:wrap;
+      @keyframes cateOpen {0% {height:0;margin:0;padding:0 2vw;border:0;}100% {height:13vw;margin:1vw 0 0;padding:2vw;}}
+      @keyframes cateClose {0% {width:100%;height:13vw;margin:1vw 0 0;padding:2vw;}100% {width:100%;height:0;margin:0;padding:0 2vw;border:0;}}
+      &--select{
+        animation:cateOpen 0.3s;
+      }
+      &--select.cateclose{
+        animation:cateClose 0.3s;
+      }
+    }
+    &_textarea{
+      &--textarea{
+        width:100%;
+        height:30vw;
+        margin:1vw 0 0;
+        padding:2vw;
+      }
+      &--count{
+        font-size:3vw;
+        text-align:right;
+      }
+    }
+  }
+  .item__stock,.item__price{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    &_heading{
+      width:100%;
+    }
+    &--title{
+      align-items:center;
+    }
+    &--input{
+      width:50vw!important;
+      margin:10vw 0 0!important;;
+      text-align:right;
+    }
+  }
+  .item__price{
+    padding:10vw 5vw 0!important;
+    >div~div{
+      margin:0!important;
+    }
+    &--price,&--tax,&--profit{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      width:100%;
+      height:30vw;
+    }
+    &--tax,&--profit{
+      border-top:1px solid #eeeeee;
+    }
+  }
+  .item__send{
+    &--button{
+      background:#3CCACE;
+      display:block;
+      width:90%;
+      height:13vw;
+      margin:0 auto 6vw;
+      padding:0 6vw;
+      color:#ffffff;
+      font-size:6vw;
+      border:none;
+      border-radius:1vw;
+    }
+    &--back{
+      display:block;
+      text-align:center;
+      margin-bottom:13vw;
+    }
+    &--note{
+      p{
+        font-size:small;
+      }
+    }
+  }
+}
+
+
+
+
+
+@media screen and (min-width:768px) {
+  .itemNew,.itemEdit{
+    margin:50px auto;
+    width:700px;
+
+    div[class$="--title"]>span{
+      margin:0 0 0 10px;
+      border-radius:5px;
+      padding:3px;
+      font-size:12px;
+    }
+    input[class$="--input"],select[class$="--select"]{
+      height:50px;
+      margin:5px 0 0;
+      padding:5px;
+    }
+    form>div{
+      padding:60px 40px;
+      >div{
+        margin:30px 0 0;
+      }
+    }
+
+    .item__image{
+      &--note{
+        font-size:14px;
+      }
+      &--upload{
+        max-height:302px;
+        &Box{
+          label{
+            height:150px;
+          }
+          &:last-of-type{
+            font-size:14px;
+            label{
+              i{
+                font-size:24px;
+              }
+            }
+          }
+          span{
+            padding:0 5px;
+            font-size:12px;
+            border-radius:5px;
+          }
+        }
+      }
+    }
+    .item__detail{
+      &_category{
+        @keyframes cateOpen {0% {height:0;margin:0;padding:0 5px;border:0;}100% {height:50px;margin:5px 0 0;padding:5px;}}
+        @keyframes cateClose {0% {width:100%;height:50px;margin:5px 0 0;padding:5px;}100% {width:100%;height:0;margin:0;padding:0 5px;border:0;}}
+      }
+      &_textarea{
+        &--textarea{
+          height:150px;
+          margin:5px 0 0;
+          padding:5px;
+        }
+        &--count{
+          font-size:8px;
+        }
+      }
+    }
+    .item__stock,.item__price{
+      &--input{
+        width:60%!important;
+        margin:30px 0 0!important;
+      }
+    }
+    .item__price{
+      padding:60px 40px 0!important;
+      &--price,&--tax,&--profit{
+        height:100px;
+      }
+    }
+    .item__send{
+      padding:40px;
+      &--button{
+        width:360px;
+        height:50px;
+        margin:0 auto 24px;
+        padding:0 24px;
+        font-size:16px;
+        border-radius:5px;
+      }
+      &--back{
+        margin:0 0 48px 0;
+      }
+    }
+  }
+}

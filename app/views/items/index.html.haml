@@ -1,0 +1,96 @@
+.itemIndex
+  %section.topVisual
+    .topVisual__inner
+      %h2.topVisual__inner--subTitle
+        人生を変えるフリマアプリ
+      %p.topVisual__inner--text
+        FURIMAはだれでもかんたんに出品・購入できる
+        %br
+        フリマアプリです
+      .topVisual__inner--btn
+        =link_to image_tag("icon/app-store.svg"),root_path,class:"aBtn"
+        =link_to image_tag("icon/google-play.svg"),root_path,class:"gBtn"
+  %section.topIntroduction
+    %h2.subTitle
+      FURIMAが選ばれる3つの理由
+    %ul.lists
+      %li.list
+        = image_tag("pict/pict-reason-01.jpg",class:"list--pict")
+        %h3.list--text
+          %span 3分
+          ですぐに出品
+        %p.list--description スマホで入力するだけで簡単に出品できる！
+      %li.list
+        = image_tag("pict/pict-reason-02.jpg",class:"list--pict")
+        %h3.list--text
+          %span シンプル
+          で使いやすい
+        %p.list--description めんどくさい入力は必要なく、検索も購入もスムーズ！
+      %li.list
+        = image_tag("pict/pict-reason-03.jpg",class:"list--pict")
+        %h3.list--text
+          手数料
+          %span 業界最安
+        %p.list--description 最大3%でお得に出品&amp;購入！
+  %section.middleVisual
+    .middleVisual__inner
+      %h2.middleVisual__inner--subTitle 会員数日本一位
+      %p.middleVisual__inner--text
+        FURIMAは、フリマアプリで最も人気。
+        %br
+        出品・購入回数も業界最多です！
+        %br
+        ほしかったあの商品に出会えるかもしれません。
+      .middleVisual__inner--btn
+        =link_to image_tag("icon/app-store.svg"),root_path,class:"aBtn"
+        =link_to image_tag("icon/google-play.svg"),root_path,class:"gBtn"
+  %section.middleIntroduction
+    %h2.subTitle
+      FURIMAの特徴
+    %ul.lists
+      %li.list
+        = image_tag("icon/icon-01.png",class:"list--pict")
+        %h3.list--text 簡単に売り買いできる
+        %p.list--description スマホひとつで、いつでもどこでも簡単に出品・購入が可能！
+      %li.list
+        = image_tag("icon/icon-02.png",class:"list--pict")
+        %h3.list--text 売上金は即日振込みに対応
+        %p.list--description 午前9時までに振込を依頼いただければ、翌日に指定の口座に入金いたします!
+      %li.list
+        = image_tag("icon/icon-03.png",class:"list--pict")
+        %h3.list--text 様々な支払いに対応
+        %p.list--description お支払いは、クレジットカードだけでなく、ポイントや売上金など多彩な方法があります。
+  %section.pickupContainer
+    %h2.pickupContainerTitle ピックアップカテゴリー
+    = link_to root_path do
+      %h3.pickupContainerSubtitle 新規投稿商品
+    .pickupContainerProducts
+      - @items.each do |item|
+        .pickupContainerProductsList
+          = link_to item_path(item.id) do
+            - if item.stock==0
+              .pickupContainerProductsSoldout
+            = image_tag item.images[0].image.url
+            .pickupContainerProductsList__body
+              %h3.pickupContainerProductsList__body--title= item.name
+              %ul.pickupContainerProductsList__body--details
+                %li= item.price
+                %li 1
+              %p (税込)
+  %section.pickupContainer
+    %h2.pickupContainerTitle ピックアップブランド
+    = link_to root_path do
+      %h3.pickupContainerSubtitle アーカイバ
+    .pickupContainerProducts
+      - @items.each do |item|
+        .pickupContainerProductsList
+          = link_to item_path(item.id) do
+            - if item.stock==0
+              .pickupContainerProductsSoldout
+            = image_tag item.images[0].image.url
+            .pickupContainerProductsList__body
+              %h3.pickupContainerProductsList__body--title= item.name
+              %ul.pickupContainerProductsList__body--details
+                %li= item.price
+                %li 1
+              %p (税込)

@@ -1,0 +1,15 @@
+.categories_all
+  .categories_all_index
+    - @categories.each do |category|
+      = link_to category.name,"##{category.name}"
+  - @categories.each do |category|
+    .categories_all_parents
+      = link_to category.name,category_path(category.id),id:"#{category.name}"
+      .categories_all_children
+        - category.children.each do |category_child|
+          = link_to category_child.name,category_path(category_child.id)
+          .categories_all_grandchildren
+            - category_child.children.each do |category_grandchild|
+              = link_to category_grandchild.name,category_path(category_grandchild.id)
+
+  = link_to "PAGE TOP","#"

@@ -1,0 +1,21 @@
+.categories_all
+  .categories_all_parents
+    = link_to "#{@category.name}の商品一覧",category_path(@category.id)
+    .categories_all_grandchildren
+      - @category.children.each do |category_child|
+        = link_to category_child.name,category_path(category_child.id)
+
+  %section.pickupContainer
+    .pickupContainerProducts
+      - @items.each do |item|
+        .pickupContainerProductsList
+          = link_to item_path(item.id) do
+            - if item.stock==0
+              .pickupContainerProductsSoldout
+            = image_tag item.images[0].image.url
+            .pickupContainerProductsList__body
+              %h3.pickupContainerProductsList__body--title= item.name
+              %ul.pickupContainerProductsList__body--details
+                %li= item.price
+                %li 1
+              %p (税込)

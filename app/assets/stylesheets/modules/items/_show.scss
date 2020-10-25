@@ -1,0 +1,494 @@
+.itemShow {
+  margin:5vw auto;
+  .itembox {
+    box-shadow:0 0 10px 0 rgba(0,0,0,0.3);
+    padding:4vw;
+    &__name {
+      text-align:center;
+      font-weight:bold;
+      font-size:5vw;
+    }
+    &__body {
+      margin:5vw 0 0;
+      overflow:hidden;
+      img{
+        object-fit:cover;
+      }
+      &--slider{
+        display:flex;
+        img{
+          transition:0.3s;
+        }
+      }
+      &--thumbnail{
+        display:flex;
+        margin:2vw 0 0;
+        width:100%;
+        overflow:scroll;
+        img{
+          width:35vw;
+          margin:0 1vw 0 0;
+        }
+      }
+    }
+    &__price {
+      margin:7vw 0;
+      text-align:center;
+      &--price {
+        font-size:10vw;
+        font-weight:bold;
+        text-align:center;
+      }
+      &--detail {
+        font-size:4vw;
+        text-align:center;
+      }
+    }
+    &__detail {
+      line-height:1.5;
+      font-size:5vw;
+      margin:0 0 10vw;
+    }
+    &__table {
+      margin-bottom:5vw;
+      &,th,td{
+        padding:4vw;
+        border-collapse:collapse;
+        border:1px solid #dedede;
+        font-size:4vw;
+        line-height:1.5;
+      }
+      th{
+        width:24vw;
+        background:#eeeeee;
+        font-weight:bold;
+      }
+      td{
+        width:72vw;
+        a{
+          display:block;
+          color:#3ccace;
+        }
+      }
+    }
+    &__edit,&__delete,&__payment{
+      background:#ea352d;
+      display:block;
+      width:100%;
+      margin:50px 0 0;
+      color:#ffffff;
+      font-size:14px;
+      line-height:50px;
+      text-align:center;
+      border-radius:10px;
+    }
+    &__delete{
+      background:#aaaaaa;
+      margin:20px 0 0;
+    }
+    &__option {
+      display:flex;
+      justify-content:space-between;
+      &--Favorite{
+        padding:2vw 3vw 2vw 9vw;
+        border:1px solid #ffb340;
+        border-radius:7vw;
+        color:#3ccace;
+        position:relative;
+        &::before,&::after {
+          content:'';
+          color:#ffaadc;
+          border-bottom:solid 3vw currentColor;
+          position:absolute;
+          top:2.5vw;
+          width:3vw;
+          height:2vw;
+          border-radius:2vw 2vw 0 0;
+          background:currentColor;
+        }
+        &::before {
+          transform:rotate(-45deg);
+          left:3.5vw;
+        }
+        &::after {
+          transform:rotate(45deg);
+          left:5vw;
+        }
+      }
+      &--Inappropriate{
+        font-size:4vw;
+        padding:2vw 3vw 2vw 7vw;
+        border-radius:1vw;
+        border:1px solid #333333;
+        position:relative;
+        &::before,&::after{
+          content:'';
+          position:absolute;
+          background:currentColor;
+        }
+        &::before{
+          top:3vw;
+          left:2vw;
+          width:3vw;
+          height:2vw;
+          border-radius:1px;
+          border:solid 1px currentColor;
+        }
+        &::after{
+          top:3vw;
+          left:1vw;
+          width:1px;
+          height:4vw;
+        }
+      }
+    }
+  }
+  .commentbox {
+    box-shadow:0 0 10px 0 rgba(0,0,0,0.3);
+    padding:4vw 2vw;
+    margin:5vw 0;
+    text-align:center;
+    &__body {
+      width:95%;
+      min-height:40vw;
+      padding:3vw;
+    }
+    &__note {
+      background:#f8f8f8;
+      padding:3vw;
+      margin:2vw;
+      font-size:4vw;
+      text-align:left;
+    }
+    &__btn {
+      background:#3ccace;
+      border:1px solid #3ccace;
+      border-radius:7vw;
+      width:60%;
+      font-size:5vw;
+      line-height:12vw;
+      color:#ffffff;
+      position:relative;
+      &::before,&::after{
+        content:'';
+        position:absolute;
+      }
+      &::before{
+        top:4vw;
+        left:7vw;
+        width:6vw;
+        height:4vw;
+        border-radius:50%;
+        background:currentColor;
+      }
+      &::after{
+        top:5vw;
+        left:7vw;
+        width:0;
+        height:0;
+        border-style:solid;
+        border-width:4.5vw 2vw 0 2vw;
+        border-color:#ffffff transparent transparent;
+        transform:rotate(45deg);
+      }
+    }
+  }
+  .relatedbox {
+    box-shadow:0 0 10px 0 rgba(0,0,0,0.3);
+    padding:4vw 2vw;
+    margin:5vw 0;
+    text-align:center;
+    &__links {
+      display:flex;
+      justify-content:space-between;
+      padding:0 5vw;
+      a{
+        position:relative;
+        color:#3ccace;
+      }
+      &--rev,&--for {
+        &::before{
+          content:'';
+          position:absolute;
+          top:2vw;
+          width:2.5vw;
+          height:2.5vw;
+          border-top:solid 1px currentColor;
+          border-right:solid 1px currentColor;
+        }
+      }
+      &--rev {
+        &::before{
+          left:-3vw;
+          transform:rotate(-135deg);
+        }
+      }
+      &--for {
+        &::before{
+          right:-3vw;
+          transform:rotate(45deg);
+        }
+      }
+    }
+    &__anchor{
+      border-top:solid 1px #eeeeee;
+      display:block;
+      padding:10vw 0 5vw;
+      color:#3CCACE;
+      font-weight:bold;
+      font-size:6vw;
+    }
+    &__lists {
+      display:flex;
+      margin:3vw auto;
+      overflow:scroll;
+      &Soldout{
+        background:rgba(255,0,0,0.6);
+        width:150%;
+        position:absolute;
+        top:25%;
+        left:-25%;
+        transform:rotate(-10deg);
+        color:#ffffff;
+        line-height:200%;
+        font-size:1.5rem;
+        &::before{
+          content:"SOLD OUT";
+        }
+      }
+      &List {
+        flex-shrink:0;
+        width:60vw;
+        position:relative;
+        overflow:hidden;
+        &__body {
+          background:#ffffff;
+          padding:3vw;
+          text-align:left;
+          font-weight:normal;
+          &--title {
+            overflow:hidden;
+            white-space:nowrap;
+            text-overflow:ellipsis;
+            line-height:1.5;
+            font-size:4vw;
+          }
+          &--details {
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            font-size:4vw;
+            li:last-child {
+              position:relative;
+              &::before,&::after {
+                content:'';
+                color:#ffaadc;
+                border-bottom:solid 3vw currentColor;
+                position:absolute;
+                top:-0.5vw;
+                width:3vw;
+                height:2vw;
+                border-radius:2vw 2vw 0 0;
+                background:currentColor;
+              }
+              &::before {
+                transform:rotate(-45deg);
+                left:-7vw;
+              }
+              &::after {
+                transform:rotate(45deg);
+                left:-6vw;
+              }
+            }
+          }
+          p {
+            font-size:3vw;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+@media screen and (min-width:768px) {
+  .itemShow {
+    width:700px;
+    margin:50px auto;
+    padding-bottom:24px;
+    .itembox {
+      padding:40px;
+      &__name {
+        font-size:24px;
+      }
+      &__body {
+        margin:30px 0 0;
+        &--thumbnail{
+          margin:10px 0 0;
+          width:100%;
+          img{
+            width:140px;
+            margin:0 5px 0 0;
+          }
+        }
+      }
+      &__price {
+        margin:24px 0;
+        &--price {
+          font-size:46px;
+        }
+        &--detail {
+          font-size:16px;
+        }
+      }
+      &__detail {
+        font-size:18px;
+        margin:0 0 30px;
+      }
+      &__table {
+        margin-bottom:20px;
+        &,th,td{
+          padding:15px;
+          font-size:14px;
+        }
+        th{
+          width:152px;
+          font-weight:400;
+        }
+        td{
+          width:467px;
+        }
+      }
+      &__option {
+        &--Favorite{
+          padding:6px 10px 6px 30px;
+          border-radius:40px;
+          &::before,&::after {
+            border-bottom:solid 10px currentColor;
+            top:11px;
+            width:8px;
+            height:3px;
+            border-radius:5px 5px 0 0;
+          }
+          &::before {
+            left:10px;
+          }
+          &::after {
+            left:14px;
+          }
+        }
+        &--Inappropriate{
+          font-size:14px;
+          padding:6px 10px 6px 25px;
+          border-radius:4px;
+          &::before{
+            top:10px;
+            left:7px;
+            width:9px;
+            height:6px;
+            border-radius:1px;
+          }
+          &::after{
+            top:9px;
+            left:5px;
+            height:15px;
+          }
+        }
+      }
+    }
+    .commentbox {
+      padding:24px 12px;
+      margin:30px 0;
+      &__body {
+        min-height:100px;
+        padding:10px;
+      }
+      &__note {
+        padding:8px;
+        margin:20px;
+        font-size:14px;
+      }
+      &__btn {
+        border-radius:100px;
+        font-size:18px;
+        line-height:48px;
+        &::before{
+          top:15px;
+          left:120px;
+          width:20px;
+          height:15px;
+        }
+        &::after{
+          top:24px;
+          left:122px;
+          border-width:9px 5px 0 5px;
+        }
+      }
+    }
+    .relatedbox {
+      padding:24px 12px;
+      margin:30px 0;
+      &__links {
+        padding:0 50px;
+        &--rev,&--for {
+          &::before{
+            top:7px;
+            width:10px;
+            height:10px;
+          }
+        }
+        &--rev {
+          &::before{
+            left:-10px;
+          }
+        }
+        &--for {
+          &::before{
+            right:-10px;
+          }
+        }
+      }
+      &__anchor{
+        padding:70px 0 40px;
+        font-size:22px;
+      }
+      &__lists {
+        margin:24px auto;
+        &List {
+          flex-shrink:0;
+          width:220px;
+          &__body {
+            padding:16px;
+            &--title {
+              font-size:16px;
+            }
+            &--details {
+              font-size:16px;
+              li:last-child {
+                &::before,&::after {
+                  border-bottom:solid 10px currentColor;
+                  top:2px;
+                  width:8px;
+                  height:3px;
+                  border-radius:5px 5px 0 0;
+                }
+                &::before {
+                  left:-25px;
+                }
+                &::after {
+                  left:-21px;
+                }
+              }
+            }
+            p {
+              font-size:10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

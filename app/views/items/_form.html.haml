@@ -1,0 +1,130 @@
+= form_with model:@item,local:true do |f|
+
+  .item__image
+    .item__image--title
+      出品画像
+      %span 必須
+    %p.item__image--note 最大10枚までアップロードできます
+    .item__image--upload
+      = f.fields_for :images do |img|
+        .item__image--uploadBox
+          = img.label :image,class:"click_label" do
+            = icon('fa','camera')
+            - if params[:action]=="new"
+              = img.file_field :image,accept:"image/*",data:{index: img.index},name:"item[images_attributes][#{img.index}][image]",multiple:true,required:true
+            - else
+              = image_tag @item.images[img.index].image_url
+              = img.file_field :image,accept:"image/*",data:{index: img.index}
+          %span.item_image--delete 削除
+          %span.item_image--change 変更
+          = img.hidden_field :image_cache if params[:action]=="create"||params[:action]=="update"
+          = img.check_box:_destroy if params[:action]=="edit"||params[:action]=="update"
+      - unless params[:action]=="new"
+        .item__image--uploadBox
+          %label.click_label{for:"item_images_attributes_#{@item.images.length}_image"}
+            = icon('fa','camera')
+            %input{type:"file",id:"item_images_attributes_#{@item.images.length}_image",accept:"image/*","data-index":"#{@item.images.length}",name:"item[images_attributes][#{@item.images.length}][image]",multiple:"multiple"}
+          %span.item_image--delete 削除
+          %span.item_image--change 変更
+    - if @item.errors.messages[:images].present?
+      %p.item__image--err= @item.errors.messages[:images]
+
+  .item__detail
+    %p.item__detail_heading 商品の詳細
+    .item__detail_name
+      .item__detail_name--title
+        商品名
+        %span 必須
+      = f.text_field :name,placeholder:"40字まで",class:"item__description_name--input",maxlength:"40",required:true
+      - if @item.errors.messages[:name].present?
+        %p.item__description_name--err 入力してください
+    .item__detail_category
+      .item__detail_category--title
+        カテゴリー
+        %span 必須
+      = f.collection_select :category_id, @categories,                    :id,:name,{prompt:"選択してください",selected:"#{@item.category.root_id if @item.category}"}, {id:"item_category_parents",  class:"item__detail_category--select",required:true}
+      = f.collection_select :category_id, @item.category.parent.siblings, :id,:name,{prompt:"選択してください",selected:"#{@item.category.parent_id}"},                 {id:"item_category_parent",   class:"item__detail_category--select",required:true}  if @item.category && @item.category.depth > 1
+      = f.collection_select :category_id, @item.category.siblings,        :id,:name,{prompt:"選択してください",selected:"#{@item.category.id}"},                        {id:"item_category",          class:"item__detail_category--select",required:true}  if @item.category && @item.category.depth > 0
+      - if @item.errors.messages[:category_id].present?
+        %p.item__detail_category--err 選択してください
+    .item__detail_brand
+      .item__detail_brand--title
+        ブランド
+      = f.text_field :brand,{placeholder:"例）ユニクロ", class:"item__detail_brand--input"}
+    .item__detail_condition
+      .item__detail_condition--title
+        商品の状態
+        %span 必須
+      = f.collection_select :condition_id,Condition.all,:id,:name,{prompt:"選択してください"},{class:"item__detail_condition--select",required:true}
+      - if @item.errors.messages[:condition_id].present?
+        %p.item__detail_condition--err 選択してください
+    .item__detail_textarea
+      .item__detail_textarea--title
+        商品の説明
+        %span 必須
+      = f.text_area :description,placeholder:"1000文字まで", rows:7,class:"item__detail_textarea--textarea",maxlength:"1000",required:true
+      - if @item.errors.messages[:description].present?
+        %p.item__detail_textarea--err 入力してください
+      %p.item__detail_textarea--count 0/1000
+
+  .item__shipment
+    %p.item__shipment_heading 配送について
+    .item__shipment_fee
+      .item__shipment_fee--title
+        配送料の負担
+        %span 必須
+      = f.collection_select :shipment_fee_id,ShipmentFee.all,:id,:name,{prompt:"選択してください"},{class:"item__shipment_fee--select",required:true}
+    - if @item.errors.messages[:shipment_fee_id].present?
+      %p.item__shipment_fee--err 選択してください
+    .item__shipment_region
+      .item__shipment_region--title
+        配送料の負担
+        %span 必須
+      = f.collection_select :prefecture_id,Prefecture.all,:id,:name,{prompt:"選択してください"},{class:"item__shipment_region--select",required:true}
+    - if @item.errors.messages[:prefecture_id].present?
+      %p.item__shipment_region--err 選択してください
+    .item__shipment_schedule
+      .item__shipment_schedule--title
+        発送までの日数
+        %span 必須
+      = f.collection_select :shipment_schedule_id,ShipmentSchedule.all,:id,:name,{prompt:"選択してください"},{class:"item__shipment_schedule--select",required:true}
+    - if @item.errors.messages[:shipment_schedule_id].present?
+      %p.item__shipment_schedule--err 選択してください
+
+  .item__stock
+    %p.item__stock_heading 販売個数
+    .item__stock--title
+      個数
+      %span 必須
+    - if params[:action]=="new" || params[:action]=="create"
+      = f.number_field :stock,class:"item__stock--input",placeholder:"1〜9,999",min:"1",max:"9999",step:"1",required:true
+      - if @item.errors.messages[:stock].present?
+        %p.item__stock_quantity--err 入力してください
+    - else
+      = f.number_field :stock,class:"item__stock--input",placeholder:"0〜9,999",min:"0",max:"9999",step:"1",required:true
+      - if @item.errors.messages[:stock].present?
+        %p.item__stock_quantity--err 入力してください
+
+  .item__price
+    %p.item__price_heading 価格
+    .item__price--title
+      販売価格入力
+      %span 必須
+    = f.number_field :price,class:"item__price--input",placeholder:"300〜9,999,999",min:"300",max:"9999999",step:"1",required:true
+    - if @item.errors.messages[:price].present?
+      %p.item__price--err 300以上9999999以下で入力してください
+    .item__price--price
+      %p 販売価格
+      %span ---
+    .item__price--tax
+      %p 販売手数料（10%）
+      %span ---
+    .item__price--profit
+      %p 販売利益
+      %span ---
+
+  .item__send
+    = f.submit "#{params[:action]=="edit"||params[:action]=="update" ? "変更する" : "出品する"}",class:"item__send--button"
+    = link_to "戻る", root_path, class: "item__send--back"
+    .item__send--note
+      %p 禁止されている行為および出品物を必ずご確認ください。偽ブランド品や盗品物などの販売は犯罪であり、法律により処罰される可能性があります。 また、出品をもちまして加盟店規約に同意したことになります。

@@ -1,0 +1,413 @@
+.registrationHeader {
+  position: static;
+  .regiNavi {
+    padding:3vw 0 7vw;
+    border-top:1px solid #eeeeee;
+    font-size:0;
+    li {
+      display:inline-block;
+      width:20vw;
+      margin:0 1vw;
+      position:relative;
+      font-size:3vw;
+      color:#888888;
+      &::before {
+        content:'';
+        background:#cccccc;
+        display:inline-block;
+        width:2.5vw;
+        height:2.5vw;
+        position:absolute;
+        top:5vw;
+        left:45%;
+        border-radius:50%;
+        z-index:1;
+      }
+      &:nth-last-of-type(n+2)::after {
+        content:'';
+        background:#cccccc;
+        display:inline-block;
+        width:20vw;
+        height:2px;
+        position:absolute;
+        top:6vw;
+        left:55%;
+      }
+      &.active {
+        font-weight:600;
+        color:#3CCACE;
+        &::before {
+          background:#3CCACE;
+        }
+      }
+    }
+  }
+}
+
+.registration,.session,.address,.regiComplete {
+  box-shadow:0 0 10px 0 rgba(0,0,0,0.3);
+  padding-bottom:10vw;
+  &Heading {
+    background:#f5f5f5;
+    position:sticky;
+    top:0;
+    padding:4vw;
+    border-bottom:1px solid #eeeeee;
+    text-align:center;
+    font-size:5vw;
+    z-index: 1;
+  }
+  &Content {
+    width:92vw;
+    margin:0 auto;
+    font-size:0;
+    form#new_user{
+      overflow:hidden;
+    }
+    .formGroup {
+      font-size:0;
+      margin:10vw 0 0;
+      label,.identification {
+        display:inline-block;
+        font-weight:600;
+        font-size:4vw;
+      }
+      .inputDefault,.selectDefault {
+        width:100%;
+        margin:1vw 0 0;
+        height:12vw;
+        padding:1vw 4vw;
+        border-radius:1vw;
+        border:1px solid #cccccc;
+        font-size:4vw;
+        &:focus {
+          border:2px solid #3CCACE;
+          outline:0;
+        }
+      }
+      &-require {
+        background:#3CCACE;
+        margin-left:3vw;
+        padding:1vw 2vw;
+        border-radius:1vw;
+        color:#fff;
+        font-size:3vw;
+        vertical-align:top;
+      }
+      .errMessage {
+        height:4vw;
+        font-size:4vw;
+        color:rgba(255,0,0,1);
+      }
+      @keyframes errHeight {0% {height:0;color:rgba(255,0,0,0);}100% {height:4vw;color:rgba(255,0,0,1);}}
+      @keyframes errHeight0 {0% {height:4vw;color:rgba(255,0,0,1);}100% {height:0;color:rgba(255,0,0,0);}}
+      .errHeight {
+        animation:errHeight 0.3s;
+      }
+      .errHeight0 {
+        animation:errHeight0 0.3s;
+      }
+      .errBorder {
+        border:2px solid #ff0000;
+      }
+      &.half {
+        >*:nth-child(3) {
+          margin-left:2vw;
+        }
+        .inputDefault {
+          width:45vw;
+          &:nth-of-type(2) {
+            margin-left:2vw;
+          }
+        }
+      }
+      &.birthday {
+        >span {
+          display:inline-block;
+          width:25vw;
+          position:relative;
+          z-index:0;
+          &::after {
+            content:'';
+            display:block;
+            width:5vw;
+            height:5vw;
+            position:absolute;
+            bottom:4vw;
+            left:103%;
+            font-size:4vw;
+          }
+          &:nth-of-type(1)::after {content:'年';}
+          &:nth-of-type(2)::after {content:'月';}
+          &:nth-of-type(3)::after {content:'日';}
+          &:nth-of-type(n+2) {
+            margin-left:6vw;
+          }
+        }
+      }
+      .field_with_errors {
+        display:inline;
+      }
+      &.zipCode {
+        display:inline-block;
+        vertical-align:top;
+        width:49%;
+        margin-left:0;
+      }
+      &.prefecture {
+        display:inline-block;
+        vertical-align:top;
+        width:49%;
+        margin-left:2%;
+      }
+    }
+    .revealedPassword {
+      background:#ccffee;
+      height:0;
+      padding:0 3vw;
+      border-radius:1vw;
+      font-size:4vw;
+      overflow:hidden;
+      @keyframes vealOpen {0% {height:0;padding:0 3vw;}100% {height:12vw;padding:3vw;}}
+      @keyframes vealClose {0% {height:12vw;padding:3vw;}100% {height:0;padding:0 3vw;}}
+      &__open {
+        animation:vealOpen 0.3s;
+        height:12vw;
+        padding:3vw;
+      }
+      &__close {
+        animation:vealClose 0.3s;
+      }
+    }
+    .submit input {
+      margin:10vw auto 0;
+      background:#3CCACE;
+      border:1px solid #3CCACE;
+      color:#fff;
+      display:block;
+      width:90%;
+      line-height:12vw;
+      font-size:4vw;
+      border-radius:1vw;
+    }
+    div[data-sitekey] {
+      margin-top:10vw;
+      div {margin:0 auto;}
+    }
+  }
+  .formGroupInfo {
+    margin:2vw 0;
+    font-size:3.5vw;
+    color:#888888;
+  }
+  &__note {
+    font-size:4vw;
+    width:87vw;
+    margin:10vw auto 0;
+    &+a {
+      margin:10vw auto 0;
+      background:#3CCACE;
+      border:1px solid #3CCACE;
+      color:#fff;
+      display:block;
+      width:90%;
+      line-height:12vw;
+      font-size:4vw;
+      border-radius:1vw;
+      text-align:center;
+    }
+  }
+  .toRegistration {
+    padding-top:6vw;
+    margin-top:6vw;
+    text-align:center;
+    overflow:hidden;
+    border-top:1px solid #eeeeee;
+    a{
+      margin:5vw auto 0;
+      background:#3CCACE;
+      border:1px solid #3CCACE;
+      color:#fff;
+      display:block;
+      width:90%;
+      line-height:12vw;
+      font-size:4vw;
+      border-radius:1vw;
+      text-align:center;}
+  }
+}
+
+.contents{
+  &__right{
+    &__logoutComment{
+      line-height:50vw;
+      text-align:center;
+    }
+  }
+}
+
+
+
+
+
+@media screen and (min-width:768px) {
+
+  .registrationHeader {
+    display:flex;
+    width:700px;
+    padding:30px 0;
+    margin:0 auto;
+    justify-content:space-evenly;
+    h1 {
+      padding:0;
+      img {
+        width:185px;
+      }
+    }
+    .regiNavi {
+      padding:0;
+      font-size:0;
+      border-top:0;
+      li {
+        width:100px;
+        margin:0 5px;
+        font-size:12px;
+        &::before {
+          width:12px;
+          height:12px;
+          top:25px;
+          left:43%;
+        }
+        &:nth-last-of-type(n+2)::after {
+          width:100px;
+          top:30px;
+        }
+      }
+    }
+  }
+
+  .registration,.session,.address,.regiComplete {
+    width:700px;
+    margin:0 auto 50px;
+    padding-bottom:24px;
+    &Heading {
+      padding:32px;
+      font-size:22px;
+    }
+    &Content {
+      width:340px;
+      form#new_user{
+        padding-top:30px;
+      }
+      .formGroup {
+        margin:24px 0 0;
+        label,.identification {
+          font-size:14px;
+        }
+        .inputDefault,.selectDefault {
+          margin:3px 0 0;
+          height:48px;
+          padding:10px 14px;
+          border-radius:4px;
+          font-size:16px;
+        }
+        &-require {
+          margin-left:8px;
+          padding:2px 4px;
+          border-radius:2px;
+          font-size:12px;
+        }
+        .errMessage {
+          height:15px;
+          font-size:14px;
+        }
+        @keyframes errHeight {0% {height:0;color:rgba(255,0,0,0);}100% {height:15px;color:rgba(255,0,0,1);}}
+        @keyframes errHeight0 {0% {height:15px;color:rgba(255,0,0,1);}100% {height:0;color:rgba(255,0,0,0);}}
+        &.half {
+          >*:nth-child(3) {
+            margin-left:2%;
+          }
+          .inputDefault {
+            width:49%;
+            &:nth-of-type(2) {
+              margin-left:2%;
+            }
+          }
+        }
+        &.birthday {
+          >span {
+            width:26%;
+            &::after {
+              width:3%;
+              height:3%;
+              bottom:33px;
+              left:103%;
+              font-size:16px;
+            }
+            &:nth-of-type(n+2) {
+              margin-left:8%;
+            }
+          }
+        }
+      }
+      @keyframes vealOpen {0% {height:0;padding:0 14px;}100% {height:48px;padding:10px 14px;}}
+      @keyframes vealClose {0% {height:48px;padding:10px 14px;}100% {height:0;padding:0 14px;}}
+      .revealedPassword {
+        padding:0 14px;
+        border-radius:4px;
+        font-size:16px;
+        line-height:28px;
+        &__open {
+          height:48px;
+          padding:10px 14px;
+        }
+      }
+      .submit input {
+        margin:24px auto 0;
+        line-height:48px;
+        font-size:14px;
+        border-radius:4px;
+      }
+    }
+    div[data-sitekey] {
+      margin-top:24px;
+    }
+    .formGroupInfo {
+      margin:10px 0;
+      font-size:14px;
+    }
+    &__note {
+      font-size:14px;
+      width:80%;
+      margin:50px auto 0;
+      text-align:center;
+      &+a {
+        margin:50px auto 0;
+        width:300px;
+        line-height:48px;
+        font-size:14px;
+        border-radius:4px;
+      }
+    }
+    .toRegistration {
+      padding-top:30px;
+      margin-top:30px;
+      a{
+        margin:25px auto;
+        width:300px;
+        line-height:48px;
+        font-size:14px;
+        border-radius:4px;
+      }
+    }
+  }
+
+  .contents{
+    &__right{
+      width:700px;
+      &__logoutComment{
+        line-height:300px;
+      }
+    }
+  }
+}

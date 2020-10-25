@@ -1,0 +1,92 @@
+.contents
+  = render "common/left_side_menu"
+  .contents__right
+    - if current_user&.card
+      .contents__right__head
+        %h3 クレジットカード情報
+      .contents__right__body
+        .card--brand= @card.brand
+        %label カード番号
+        .card--num= "**** **** **** #{@card.last4}"
+        - if @card.name
+          %label カード氏名
+          .card--name= @card.name
+        =link_to "削除","/card/#{current_user.card.id}", method:"delete",class:"contents__right__body-btn"
+    - else
+      .contents__right__head
+        %h3 クレジットカード情報入力
+      = form_with url: card_index_path,local:true,id:"card__form",class:"contents__right__body" do |f|
+        %input#card__form--inputHidden{type:"hidden",name:"payjp-token"}
+
+        %label カード番号
+        %span.contents__right__body-require 必須
+        #card__form--number-form.payjs-outer
+
+        %label 有効期限
+        %span.contents__right__body-require 必須
+        #card__form--expiry-form.payjs-outer
+
+        %label セキリュティーコード
+        %span.contents__right__body-require 必須
+        #card__form--cvc-form.payjs-outer
+
+        #card__form--errMessage
+        = f.submit "登録する",id:"card__form--submit",class:"contents__right__body-btn"
+
+
+
+
+
+%script{src: "https://js.pay.jp/v2/pay.js", type: "text/javascript"}
+
+:javascript
+
+  if(typeof gon != 'undefined'){
+
+    const style = {
+      base: {
+        backgroundColor:'#ffffff',
+        '::placeholder': {
+          color: '#bbbbbb',
+        }
+      },
+      invalid: {
+        color: 'red',
+      }
+    }
+    const stylenum = {
+      base: {
+        backgroundColor:'#ffffff',
+        '::placeholder': {
+          color: '#ffffff',
+        }
+      },
+      invalid: {
+        color: 'red',
+      }
+    }
+
+    let payjp = Payjp(gon.api_key);
+    let elements = payjp.elements();
+    let numberElement = elements.create('cardNumber', {style: stylenum});
+    let expiryElement = elements.create('cardExpiry', {style: style});
+    let cvcElement = elements.create('cardCvc', {style: style});
+
+    numberElement.mount('#card__form--number-form');
+    expiryElement.mount('#card__form--expiry-form');
+    cvcElement.mount('#card__form--cvc-form');
+
+    $(".contents").on("click","#card__form--submit",
+      function(e){
+        e.preventDefault();
+        payjp.createToken(expiryElement).then(function(response){
+          if(response.error){
+            $('#card__form--errMessage').text(response.error.message);
+          }else{
+            $("#card__form--inputHidden").attr("value",response.id);
+            $("#card__form").submit();
+          }
+        });
+      }
+    );
+  }

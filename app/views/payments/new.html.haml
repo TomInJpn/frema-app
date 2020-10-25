@@ -1,0 +1,37 @@
+.payment
+  %main
+    %section
+      %h2.paymentHeader 購入内容の確認
+    %section.paymentDetail
+      %figure.paymentDetailImage= image_tag "#{@item.images[0].image}"
+      %section.paymentDetailDescription
+        %p= @item.name
+        %p.paymentDetailDescription--price
+          %span= @shipment_fee.name
+          %span= "¥#{@item.price.to_s(:delimited)}"
+    %section.paymentAmount
+      %span.paymentAmount--total 支払い金額
+      - if @postage
+        %span.paymentAmount--price= "¥#{(@item.price+@postage[:"#{current_user.address.prefecture_id}"]).to_s(:delimited)}"
+      - else
+        %span.paymentAmount--price= "¥#{@item.price.to_s(:delimited)}"
+    %section.paymentMethod
+      - unless current_user.id==@item.user_id
+        - if @card
+          .card
+            %span.card_type= "#{@card.brand.upcase}"
+            %span.card_num= "**** **** **** **** #{@card.last4}"
+          .card_name= @card.name
+          - if @item.stock == 0
+            .soldOut 売り切れました
+          -else
+            = form_with url:item_payments_path,local:true,id:"new_form" do |f|
+              %section.paymentQuantity
+                %span 購入数
+                = f.number_field :quantity,placeholder:"1〜#{@item.stock.to_s(:delimited)}",min:"1",max:"#{@item.stock}",step:"1",class:"content__detail_stock--input"
+              .paymentPurchase
+                = f.submit "購入する",class:"paymentPurchase--button"
+        - else
+          .card_registration
+            %span.card_registration--title カードでのお支払いにご協力ください。
+            %span.card_registration--comment 先にユーザーマイページでカードのご登録をお願いします。

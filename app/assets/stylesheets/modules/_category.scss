@@ -1,0 +1,244 @@
+.categories_all{
+  box-shadow:0 0 10px 0 rgba(0,0,0,0.3);
+  >a{
+    background:#3CCACE;
+    opacity:0.6;
+    display:block;
+    width:20vw;
+    height:15vw;
+    padding:10vw 0 0;
+    position:fixed;
+    bottom:5vw;
+    left:5vw;
+    font-size:3vw;
+    color:#ffffff;
+    text-align:center;
+    border-radius:1vw;
+    transition:0.3s;
+    &:hover{
+      opacity:1;
+    }
+    &::before{
+      font-family:'Font Awesome 5 Free';
+      font-weight:900;
+      content:'\f102';
+      font-size:7vw;
+      position:absolute;
+      width:7vw;
+      height:7vw;
+      top:-3vw;
+      bottom:0;
+      right:0;
+      left:0;
+      margin:auto;
+    }
+  }
+
+  &_index{
+    a{
+      display:inline-block;
+      padding:0 3vw;
+      margin:1vw;
+      line-height:10vw;
+      font-size:4vw;
+      box-shadow:0 0 5px rgba(0,0,0,0.2);
+      border-radius:1vw;
+    }
+    a:hover{
+      background:#3CCACE;
+      color:#ffffff;
+    }
+  }
+  &_parents{
+    >a{
+      background:#3CCACE;
+      display:block;
+      padding:2vw;
+      margin:5vw 0;
+      color:#ffffff;
+      font-size:6vw;
+    }
+  }
+  &_children{
+    display:flex;
+    flex-wrap:wrap;
+    >a{
+      display:block;
+      width:100%;
+      padding:0 2vw;
+      margin:3vw 0;
+      font-size:5vw;
+      font-weight:bold;
+    }
+  }
+  &_grandchildren{
+    >a{
+      display:inline-block;
+      padding:0 2vw;
+      margin:2vw 0;
+      font-size:4vw;
+      color:#888888;
+      transition:0.3s;
+    }
+    >a:hover{
+      color:#ffa500;
+      transform:translateY(-3px);
+    }
+  }
+  .pickupContainer {
+    background:#f8f8f8;
+    padding:15vw 5vw 0;
+    overflow:hidden;
+    text-align:center;
+    &Products {
+      display:flex;
+      margin:6vw auto;
+      overflow:scroll;
+      &Soldout{
+        background:rgba(255,0,0,0.6);
+        width:150%;
+        position:absolute;
+        top:25%;
+        left:-25%;
+        transform:rotate(-10deg);
+        color:#ffffff;
+        line-height:200%;
+        font-size:1.5rem;
+        &::before{
+          content:"SOLD OUT";
+        }
+      }
+      &List {
+        flex-shrink:0;
+        width:90vw;
+        position:relative;
+        overflow:hidden;
+        &__body {
+          background:#ffffff;
+          padding:4vw;
+          text-align:left;
+          font-weight:normal;
+          &--title {
+            overflow:hidden;
+            white-space:nowrap;
+            text-overflow:ellipsis;
+            line-height:1.5;
+            font-size:5vw;
+          }
+          &--details {
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            font-size:4vw;
+            li:last-child {
+              position:relative;
+              &::before,&::after {
+                content:'';
+                color:#ffaadc;
+                border-bottom:solid 10px currentColor;
+                position:absolute;
+                top:2px;
+                width:8px;
+                height:3px;
+                border-radius:5px 5px 0 0;
+                background:currentColor;
+              }
+              &::before {
+                transform:rotate(-45deg);
+                left:-25px;
+              }
+              &::after {
+                transform:rotate(45deg);
+                left:-21px;
+              }
+            }
+          }
+          p {
+            font-size:3vw;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+@media screen and (min-width:768px) {
+  .categories_all{
+    width:700px;
+    margin:50px auto;
+    padding:50px;
+    >a{
+      width:100px;
+      height:80px;
+      padding:55px 0 0;
+      bottom:30px;
+      left:30px;
+      font-size:12px;
+      border-radius:5px;
+      &::before{
+        font-size:25px;
+        width:20px;
+        height:20px;
+        top:-25px;
+      }
+    }
+
+    &_index{
+      a{
+        padding:0 10px;
+        margin:5px;
+        line-height:28px;
+        font-size:14px;
+        border-radius:5px;
+      }
+    }
+    &_parents{
+      margin:20px 0;
+      border:solid 1px #3CCACE;
+      border-radius:5px 5px 0 0;
+      >a{
+        padding:10px;
+        margin:0;
+        font-size:20px;
+      }
+    }
+    &_children{
+      >a{
+        padding:0 10px;
+        margin:10px 0;
+        font-size:18px;
+      }
+    }
+    &_grandchildren{
+      >a{
+        width:296px;
+        padding:0 10px;
+        margin:10px 0;
+        font-size:16px;
+      }
+    }
+    .pickupContainer {
+      padding:80px 50px 0;
+      &Products {
+        max-width:1100px;
+        margin:24px auto;
+        &List {
+          width:220px;
+          &__body {
+            padding:16px;
+            &--title,&--details {
+              font-size:16px;
+            }
+            p {
+              font-size:10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

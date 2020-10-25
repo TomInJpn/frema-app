@@ -1,0 +1,67 @@
+.registration
+  %main
+    %section
+      %h2.registrationHeading 会員情報入力
+      = form_for(@user, url: user_registration_path) do |f|
+        .registrationContent
+          .formGroup
+            = f.label :nickname,"ニックネーム"
+            %span.formGroup-require 必須
+            = f.text_field :nickname, placeholder:"例) DIV太郎", class:"inputDefault"
+          .formGroup
+            = f.label :email,"メールアドレス"
+            %span.formGroup-require 必須
+            - if @user.errors.messages[:email][0]
+              = f.email_field :email, autocomplete: "email",placeholder:"PC・携帯どちらでも可", class:"inputDefault errBorder"
+              .errMessage.errHeight= "このメールアドレス#{@user.errors.messages[:email][0]}"
+            - else
+              = f.email_field :email, autocomplete: "email",placeholder:"PC・携帯どちらでも可", class:"inputDefault"
+          .formGroup
+            = f.label :password,"パスワード"
+            %span.formGroup-require 必須
+            = f.password_field :password, autocomplete: "new-password",placeholder:"7文字以上の半角英数字", class:"inputDefault"
+            %p.formGroupInfo ※ 英字と数字の両方を含めて設定してください
+            %input#reveal_password{type:"checkbox"}
+            %label.formGroupInfo{for:"reveal_password"} パスワードを表示する
+            .revealedPassword
+          .formGroup
+            = f.label :password_confirmation,"パスワード：確認用"
+            %span.formGroup-require 必須
+            = f.password_field :password_confirmation, autocomplete: "new-password",placeholder:"7文字以上の半角英数字", class:"inputDefault"
+          .formGroup
+            %h3.identification 本人確認
+            %p.formGroupInfo 安心・安全にご利用いただくために、お客さまの本人情報の登録にご協力ください。他のお客さまに公開されることはありません。
+          .formGroup.half
+            %div
+              = f.label "お名前(全角)"
+              %span.formGroup-require 必須
+            = f.text_field :family_name_kanji, placeholder:"例) 山田", class:"inputDefault #{'errBorder' if @user.errors.messages[:family_name_kanji][0]}",value:"#{@user[:family_name_kanji]}"
+            = f.text_field :first_name_kanji, placeholder:"例) 太郎", class:"inputDefault #{'errBorder' if @user.errors.messages[:first_name_kanji][0]}",value:"#{@user[:first_name_kanji]}"
+            - if @user.errors.messages[:family_name_kanji][0]
+              .errMessage.errHeight "姓 #{@user.errors.messages[:family_name_kanji][0]}"
+            - if @user.errors.messages[:first_name_kanji][0]
+              .errMessage.errHeight "名 #{@user.errors.messages[:first_name_kanji][0]}"
+          .formGroup.half
+            %div
+              = f.label "お名前かな(全角)"
+              %span.formGroup-require 必須
+            = f.text_field :family_name_kana, placeholder:"例) やまだ", class:"inputDefault #{'errBorder' if @user.errors.messages[:family_name_kana][0]}",value:"#{@user[:family_name_kana]}"
+            = f.text_field :first_name_kana, placeholder:"例) たろう", class:"inputDefault #{'errBorder' if @user.errors.messages[:first_name_kana][0]}",value:"#{@user[:first_name_kana]}"
+            - if @user.errors.messages[:family_name_kana][0]
+              .errMessage.errHeight "姓 #{@user.errors.messages[:family_name_kana][0]}"
+            - if @user.errors.messages[:first_name_kana][0]
+              .errMessage.errHeight "名 #{@user.errors.messages[:first_name_kana][0]}"
+          .formGroup.birthday
+            %div
+              = f.label "生年月日"
+              %span.formGroup-require 必須
+            %span
+              %select#year.selectDefault{name:"birth_year"}
+            %span
+              %select#month.selectDefault{name:"birth_month"}
+            %span
+              %select#day.selectDefault{name:"birth_day"}
+            = f.hidden_field :birthday
+          %p.formGroupInfo ※ 本人情報は正しく入力してください。会員登録後、修正するにはお時間を頂く場合があります。
+          .submit
+            = f.submit "次へ進む"

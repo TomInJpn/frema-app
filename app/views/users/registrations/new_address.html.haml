@@ -1,0 +1,58 @@
+.address
+  %main
+    %section
+      %h2.addressHeading 送付先情報入力
+      = form_for @address do |f|
+        .addressContent
+          .formGroup.half
+            %div
+              = f.label "お名前(全角)"
+              %span.formGroup-require 必須
+            - if @address.errors.messages[:family_name_kanji][0]||@address.errors.messages[:first_name_kanji][0]
+              = f.text_field :family_name_kanji, placeholder:"例) 山田", class:"inputDefault #{'errBorder' if @address.errors.messages[:family_name_kanji][0]}"
+              = f.text_field :first_name_kanji, placeholder:"例) 太郎", class:"inputDefault #{'errBorder' if @address.errors.messages[:first_name_kanji][0]}"
+              - if @address.errors.messages[:family_name_kanji][0]
+                .errMessage.errHeight "姓 #{@address.errors.messages[:family_name_kanji][0]}"
+              - if @address.errors.messages[:first_name_kanji][0]
+                .errMessage.errHeight "名 #{@address.errors.messages[:first_name_kanji][0]}"
+            - else
+              = f.text_field :family_name_kanji, placeholder:"例) 山田", class:"inputDefault",value:"#{@user[:family_name_kanji]}"
+              = f.text_field :first_name_kanji, placeholder:"例) 太郎", class:"inputDefault",value:"#{@user[:first_name_kanji]}"
+          .formGroup.half
+            %div
+              = f.label "お名前かな(全角)"
+              %span.formGroup-require 必須
+            - if @address.errors.messages[:family_name_kana][0]||@address.errors.messages[:first_name_kana][0]
+              = f.text_field :family_name_kana, placeholder:"例) やまだ", class:"inputDefault #{'errBorder' if @address.errors.messages[:family_name_kana][0]}"
+              = f.text_field :first_name_kana, placeholder:"例) たろう", class:"inputDefault #{'errBorder' if @address.errors.messages[:first_name_kana][0]}"
+              - if @address.errors.messages[:family_name_kana][0]
+                .errMessage.errHeight "姓かな #{@address.errors.messages[:family_name_kana][0]}"
+              - if @address.errors.messages[:first_name_kana][0]
+                .errMessage.errHeight "名かな #{@address.errors.messages[:first_name_kana][0]}"
+            - else
+              = f.text_field :family_name_kana, placeholder:"例) やまだ", class:"inputDefault",value:"#{@user[:family_name_kana]}"
+              = f.text_field :first_name_kana, placeholder:"例) たろう", class:"inputDefault",value:"#{@user[:first_name_kana]}"
+          .formGroup.zipCode
+            = f.label :post_number,"〒"
+            %span.formGroup-require 必須
+            = f.text_field :post_number, placeholder:"ハイフン必須", class:"inputDefault"
+          .formGroup.prefecture
+            = f.label :prefecture,"都道府県"
+            %span.formGroup-require 必須
+            = f.collection_select :prefecture_id,Prefecture.all,:id,:name,{prompt:"--"},{class:"inputDefault"}
+          .formGroup
+            = f.label :city,"市区町村"
+            %span.formGroup-require 必須
+            = f.text_field :city, placeholder:"例) 千代田区", class:"inputDefault"
+          .formGroup
+            = f.label :block_number,"番地"
+            %span.formGroup-require 必須
+            = f.text_field :block_number, placeholder:"例) 1-1-1", class:"inputDefault"
+          .formGroup
+            = f.label :apartment_name,"マンション名"
+            = f.text_field :apartment_name, placeholder:"例) 千代田区マンション101号室", class:"inputDefault"
+          .formGroup
+            = f.label :phone_number,"電話番号"
+            = f.telephone_field :phone_number, placeholder:"ハイフン不要", class:"inputDefault"
+          .submit
+            = f.submit "完了する"

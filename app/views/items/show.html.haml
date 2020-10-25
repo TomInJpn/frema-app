@@ -1,0 +1,76 @@
+.itemShow
+  .itembox
+    %div.itembox__name= @item.name
+    .itembox__body
+      .itembox__body--slider
+        - @item.images.each do |image|
+          = image_tag image.image.url
+      .itembox__body--thumbnail
+        - @item.images.each_with_index do |image,index|
+          %div{"data-index":"#{index}",ontouchstart:""}= image_tag image.image.url
+      .itembox__price--price
+        %span= @item.price
+        %span 円
+      .itembox__price--detail
+        %span (税込)
+        %span= @item.shipment_fee.name
+    .itembox__detail= simple_format(@item.description)
+    %table.itembox__table
+      %tr
+        %th 出品者
+        %td= @item.user.nickname
+      %tr
+        %th カテゴリー
+        %td
+          - @item_ancestors.each do |ancestor|
+            = link_to ancestor.name,category_path(ancestor.id)
+          = link_to @item.category.name,category_path(@item.category.id)
+      %tr
+        %th ブランド
+        %td= @item.brand
+      %tr
+        %th  商品の状態
+        %td= @item.condition.name
+      %tr
+        %th 配送料の負担
+        %td= @item.shipment_fee.name
+      %tr
+        %th 発送元の地域
+        %td= @item.prefecture.name
+      %tr
+        %th 発送日の目安
+        %td= @item.shipment_schedule.name
+    - if current_user && current_user.id == @item.user_id
+      = link_to '商品の編集',edit_item_path(@item.id),class:"itembox__edit"
+      = link_to 'この商品を削除',item_path(@item.id),class:"itembox__delete",method: :delete
+    - elsif current_user && current_user.id != @item.user_id && @item.stock!=0
+      = link_to '購入画面に進む',new_item_payment_path(@item.id),class:"itembox__payment"
+
+  - if current_user && current_user.id != @item.user_id
+    .commentbox
+      %form
+        %textarea.commentbox__body
+        %p.commentbox__note
+          相手のことを考え丁寧なコメントを心がけましょう。
+          %br
+          不快な言葉遣いなどは利用制限や退会処分となることがあります。
+        %button.commentbox__btn{name: "button", type: "submit"} コメントする
+
+  .relatedbox
+    .relatedbox__links
+      = link_to "前の商品",root_path,class:"relatedbox__links--rev"
+      = link_to "後の商品",root_path,class:"relatedbox__links--for"
+    = link_to "#{@item.category.name}をもっと見る",root_path,class:"relatedbox__anchor"
+    .relatedbox__lists
+      - @items.each do |item|
+        .relatedbox__listsList
+          = link_to item_path(item.id) do
+            - if item.stock==0
+              .relatedbox__listsSoldout
+            = image_tag item.images[0].image.url
+            .relatedbox__listsList__body
+              %h3.relatedbox__listsList__body--title= item.name
+              %ul.relatedbox__listsList__body--details
+                %li= item.price
+                %li 1
+              %p (税込)
