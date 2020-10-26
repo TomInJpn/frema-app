@@ -7,6 +7,11 @@ class ItemsController < ApplicationController
     @items = Item.order(created_at:"DESC").limit(5)
   end
 
+  def show
+    @item_ancestors = @item.category.ancestors
+    @items = Item.where(category_id:@item.category_id).order(created_at:"DESC").limit(5)
+  end
+
   def new
     @item = Item.new
     @image = @item.images.build
@@ -19,11 +24,6 @@ class ItemsController < ApplicationController
     else
       render :new
     end
-  end
-
-  def show
-    @item_ancestors = @item.category.ancestors
-    @items = Item.where(category_id:@item.category_id).order(created_at:"DESC").limit(5)
   end
 
   def update

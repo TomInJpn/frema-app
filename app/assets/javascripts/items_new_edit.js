@@ -88,7 +88,6 @@ $(function(){
         let file = new DataTransfer();
         let reader = new FileReader();
         file.items.add(datas[i]);
-        reader.readAsDataURL(file.files[0]);
         if(click_place=="click_label"){
           if($(".item__image--uploadBox_none").length){
             parent_label = $(`label[for="${$(".item__image--uploadBox_none:first label").attr("for")}"]`);
@@ -109,6 +108,7 @@ $(function(){
           $(this).closest(".click_label").siblings('input[id$="_cache"]').remove();
           $(`#item_images_attributes_${image_number+i}_image`)[0].files=file.files;
         }
+        reader.readAsDataURL(file.files[0]);
         reader.onload = function(){
           let img_src = $("<img>").attr("src",reader.result);
           parent_label.children("img").remove();
@@ -145,7 +145,6 @@ $(function(){
         let file = new DataTransfer();
         let reader = new FileReader();
         file.items.add(datas[i]);
-        reader.readAsDataURL(file.files[0]);
         if($(".item__image--uploadBox_none").length){
           parent_label = $(`label[for="${$(".item__image--uploadBox_none:first label").attr("for")}"]`);
           $(".item__image--uploadBox_none:first>div").unwrap();
@@ -160,6 +159,7 @@ $(function(){
           $(`#item_images_attributes_${image_number+i-delete_box_num}_image`)[0].files=file.files;
         }
         upload_box_width();
+        reader.readAsDataURL(file.files[0]);
         reader.onload = function(){
           let img_src = $("<img>").attr("src",reader.result);
           parent_label.children("img").remove();
