@@ -20,11 +20,11 @@
             %li{class:"#{'active' if @address && !session["devise.regist_data"]}"} 完了
       - elsif (params[:controller]=="items"&&params[:action]=="index") || (params[:action]=="show") || (params[:controller]=="categories")
         .mainHeader__search
-          %form
-            %input{placeholder:"キーワードから探す",type:"text"}
-            %button
-              =image_tag("icon/icon-search.png",alt:"")
-        %ul.mainHeader__result
+          = form_with url:search_path,local:true do |f|
+            = f.text_field :search,placeholder:"キーワードから探す"
+            = f.submit
+            =image_tag("icon/icon-search.png",alt:"")
+            %ul.mainHeader__result
         .mainNavi
           %ul.mainNaviLeft
             %span

@@ -16,19 +16,50 @@
     border-top:1px solid #eeeeee;
     form {
       display:flex;
+      position:relative;
     }
-    input {
+    input[type="text"] {
       width:calc(100% - 10vw);
       height:10vw;
       padding:0 0 0 2vw;
       font-size:5vw;
     }
-    button {
+    input[type="submit"] {
       background:#3CCACE;
       width:10vw;
+      height:10vw;
       padding:2vw;
       border:0;
+      font-size:0;
       cursor:pointer;
+    }
+    img{
+      width:10vw;
+      height:10vw;
+      padding:2vw;
+      position:absolute;
+      right:0;
+      pointer-events:none;
+    }
+  }
+  &__result {
+    width:calc(100% - 10vw);
+    position:absolute;
+    top:100%;
+    z-index:1;
+    text-align:left;
+    box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.3);
+    li{
+      background:#ffffff;
+      border-top:solid 1px #eeeeee;
+      line-height: 10vw;
+      padding:0 3vw;
+      a{
+        display:block;
+        &:hover{
+          color:#ffa500;
+        }
+      }
     }
   }
   .mainNavi {
@@ -415,15 +446,28 @@
       form {
         width:100%;
       }
-      input {
+      input[type="text"] {
         width:calc(100% - 36px);
         height:36px;
         padding:0 0 0 5px;
         font-size:16px;
       }
-      button {
+      input[type="submit"] {
         width:36px;
+        height:36px;
+      }
+      img{
+        width:36px;
+        height:36px;
         padding:8px;
+      }
+    }
+    &__result {
+      width:calc(100% - 36px);
+      li{
+        background:#ffffff;
+        line-height:45px;
+        padding:0 10px;
       }
     }
     .mainNavi {

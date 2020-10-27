@@ -26,4 +26,7 @@ Rails.application.routes.draw do
 
   resources :card, only: [:new, :create, :destroy]
 
+
+  get "search", to: "searches#ajax"
+
 end
