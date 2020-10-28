@@ -78,9 +78,9 @@
       %p.item__shipment_fee--err 選択してください
     .item__shipment_region
       .item__shipment_region--title
-        配送料の負担
+        発送元の地域
         %span 必須
-      = f.collection_select :prefecture_id,Prefecture.all,:id,:name,{prompt:"選択してください"},{class:"item__shipment_region--select",required:true}
+      = f.collection_select :prefecture_id,Prefecture.all,:id,:name,{prompt:"選択してください",selected:"#{current_user.address.prefecture_id}"},{class:"item__shipment_region--select",required:true}
     - if @item.errors.messages[:prefecture_id].present?
       %p.item__shipment_region--err 選択してください
     .item__shipment_schedule
