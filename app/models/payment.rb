@@ -2,9 +2,11 @@ class Payment < ApplicationRecord
   validates :charge_id, presence: true
   validates :quantity,  presence: true, numericality: { only_integer: true, greater_than: 0, less_than_or_equal_to: 9999}
   validate  :qtty_max
+  validates :payment,   presence: true
 
-  belongs_to :item
   belongs_to :user
+  belongs_to :buyer, class_name: "User"
+  belongs_to :item
 
   private
   def qtty_max
