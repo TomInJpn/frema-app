@@ -35,6 +35,9 @@
           font-size:5vw;
           font-weight:bold;
           margin:0 0 0 2vw;
+          &::before{
+            content:"¥";
+          }
         }
       }
     }
@@ -48,6 +51,9 @@
     }
     &--price{
       font-size:5vw;
+      &::before{
+        content:"¥";
+      }
     }
   }
   &Method{

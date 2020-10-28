@@ -8,13 +8,13 @@
         %p= @item.name
         %p.paymentDetailDescription--price
           %span= @shipment_fee.name
-          %span= "¥#{@item.price.to_s(:delimited)}"
+          %span= @item.price.to_s(:delimited)
     %section.paymentAmount
       %span.paymentAmount--total 支払い金額
       - if @postage
-        %span.paymentAmount--price= "¥#{(@item.price+@postage[:"#{current_user.address.prefecture_id}"]).to_s(:delimited)}"
+        %span.paymentAmount--price= (@item.price+@postage[:"#{current_user.address.prefecture_id}"]).to_s(:delimited)
       - else
-        %span.paymentAmount--price= "¥#{@item.price.to_s(:delimited)}"
+        %span.paymentAmount--price= @item.price.to_s(:delimited)
     %section.paymentMethod
       - unless current_user.id==@item.user_id
         - if @card
