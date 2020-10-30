@@ -87,13 +87,14 @@
   }
   .pickupContainer {
     background:#f8f8f8;
-    padding:15vw 5vw 0;
+    padding:5vw;
     overflow:hidden;
     text-align:center;
     &Products {
       display:flex;
       margin:6vw auto;
       overflow:scroll;
+      scroll-snap-type:x;
       &Soldout{
         background:rgba(255,0,0,0.6);
         width:150%;
@@ -113,6 +114,21 @@
         width:90vw;
         position:relative;
         overflow:hidden;
+        scroll-snap-align: start;
+        display: flex;
+        align-items: stretch;
+        a{
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: stretch;
+        }
+        &__img{
+          background: #888888;
+          display: flex;
+          align-items: center;
+          height: 100%;
+        }
         &__body {
           background:#ffffff;
           padding:4vw;
@@ -222,7 +238,7 @@
       }
     }
     .pickupContainer {
-      padding:80px 50px 0;
+      padding:40px 50px;
       &Products {
         max-width:1100px;
         margin:24px auto;

@@ -4,7 +4,7 @@
     .itembox__body
       .itembox__body--slider
         - @item.images.each do |image|
-          = image_tag image.image.url
+          .itembox__body--slider__img= image_tag image.image.url
       .itembox__body--thumbnail
         - @item.images.each_with_index do |image,index|
           %div{"data-index":"#{index}",ontouchstart:""}= image_tag image.image.url
@@ -67,7 +67,7 @@
           = link_to item_path(item.id) do
             - if item.stock==0
               .relatedbox__listsSoldout
-            = image_tag item.images[0].image.url
+            .relatedbox__listsList__img= image_tag item.images[0].image.url
             .relatedbox__listsList__body
               %h3.relatedbox__listsList__body--title= item.name
               %ul.relatedbox__listsList__body--details
