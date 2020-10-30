@@ -16,7 +16,11 @@
       }
       &--slider{
         display:flex;
-        img{
+        &__img{
+          display: flex;
+          align-items: center;
+          flex-shrink: 0;
+          width: 100%;
           transition:0.3s;
         }
       }
@@ -25,9 +29,13 @@
         margin:2vw 0 0;
         width:100%;
         overflow:scroll;
-        img{
-          width:35vw;
-          margin:0 1vw 0 0;
+        div{
+          display:flex;
+          align-items: center;
+          img{
+            width:35vw;
+            margin:0 1vw 0 0;
+          }
         }
       }
     }
@@ -242,6 +250,7 @@
       display:flex;
       margin:3vw auto;
       overflow:scroll;
+      scroll-snap-type:x;
       &Soldout{
         background:rgba(255,0,0,0.6);
         width:150%;
@@ -261,6 +270,21 @@
         width:60vw;
         position:relative;
         overflow:hidden;
+        scroll-snap-align: start;
+        display: flex;
+        align-items: stretch;
+        a{
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: stretch;
+        }
+        &__img{
+          background: #888888;
+          display: flex;
+          align-items: center;
+          height: 100%;
+        }
         &__body {
           background:#ffffff;
           padding:3vw;
@@ -329,9 +353,11 @@
         &--thumbnail{
           margin:10px 0 0;
           width:100%;
-          img{
-            width:140px;
-            margin:0 5px 0 0;
+          div{
+            img{
+              width:140px;
+              margin:0 5px 0 0;
+            }
           }
         }
       }

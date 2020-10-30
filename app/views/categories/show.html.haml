@@ -12,7 +12,7 @@
           = link_to item_path(item.id) do
             - if item.stock==0
               .pickupContainerProductsSoldout
-            = image_tag item.images[0].image.url
+            .pickupContainerProductsList__img= image_tag item.images[0].image.url
             .pickupContainerProductsList__body
               %h3.pickupContainerProductsList__body--title= item.name
               %ul.pickupContainerProductsList__body--details
