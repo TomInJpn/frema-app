@@ -4,17 +4,17 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!,except: [:index,:show]
 
   def index
-    @items = Item.order(created_at:"DESC").limit(5)
+    @items = Item.order(created_at:"DESC").limit(5).includes(:images)
   end
 
   def show
     @item_ancestors = @item.category.ancestors
-    @items = Item.where(category_id:@item.category_id).order(created_at:"DESC").limit(5)
+    @items = Item.where(category_id:@item.category_id).order(created_at:"DESC").limit(5).includes(:images)
   end
 
   def new
     @item = Item.new
-    @image = @item.images.build
+    @item.images.build
   end
 
   def create
@@ -27,7 +27,7 @@ class ItemsController < ApplicationController
   end
 
   def update
-    if @item.update(item_params)
+    if @item.user_id == current_user.id && @item.update(item_params)
       redirect_to root_path
     else
       render :edit
@@ -56,9 +56,13 @@ class ItemsController < ApplicationController
       :shipment_schedule_id,
       :stock,
       :price,
-      images_attributes:[:image,:image_cache,:id,:_destroy],
-    )
-    .merge(user_id:current_user.id)
+      images_attributes:[
+        :image,
+        :image_cache,
+        :id,
+        :_destroy,
+      ],
+    ).merge(user_id:current_user.id)
   end
 
   def set_item
