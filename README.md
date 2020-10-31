@@ -153,4 +153,4 @@
 - has_many :items
 
 ## ER図
-![ER図](https://user-images.githubusercontent.com/66042540/97771075-d1854980-1b7c-11eb-8813-595f9d63d579.jpg)
+![frema-app](https://user-images.githubusercontent.com/66042540/97772242-a274d500-1b88-11eb-91e3-277bf20c4592.jpg)
