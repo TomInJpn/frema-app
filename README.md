@@ -10,8 +10,8 @@
 
 ## チーム開発との主な相違点
 
-<!-- * ヘッダー部
-  * ancestryによって、ヘッダー表示のたびに1000個ものSQLを発行していた問題を解消
+* ヘッダー部
+  * ancestryによって、ヘッダー表示のたびに多くのSQLを発行していた問題を解消
   * 検索機能を追加
   * パンくずリストを追加(ancestry)
 * TOPページ
@@ -24,15 +24,18 @@
   * 販売個数欄を追加
   * 商品の説明欄に文字数カウンターを追加
   * 発送元の地域のデフォルトをcurrent_user.addressに変更
+  * 編集ボタンなど、可動しない問題を解消
 * 購入確認ページ
   * 購入数・送料により、支払金額を変更
 * ユーザーマイページ
   * デザイン変更
 * カテゴリーページを追加(ancestry)
 * モデル単体テスト
-  * しきい値のテストが無い問題を解消 -->
+  * しきい値のテストが無い問題を解消
+* README
+  * ER図追加
 
-> チーム開発納期内に単独で終了させております。
+> チーム開発納期内（2020/10/31/15時迄）に単独で終了させております。
 
 ## usersテーブル
 |Column|Type|Options|
@@ -105,7 +108,7 @@
 |Column|Type|Options|
 |------|----|-------|
 |user_id|references|null: false, foreign_key: true|
-|category|references|null: false, foreign_key: true|
+|category_id|references|null: false, foreign_key: true|
 |name|string|null: false|
 |description|text|null: false|
 |brand|string||
@@ -148,3 +151,6 @@
 ### Association
 - has_ancestry
 - has_many :items
+
+## ER図
+![ER図](https://user-images.githubusercontent.com/66042540/97771075-d1854980-1b7c-11eb-8813-595f9d63d579.jpg)
