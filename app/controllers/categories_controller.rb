@@ -10,14 +10,9 @@ class CategoriesController < ApplicationController
   end
 
   def show
+    @categories = Category.order(id:"ASC").where(ancestry:nil)
     @category = Category.find(params[:id])
     @items = Item.order(created_at:"DESC").where(category_id: @category.subtree_ids).limit(5).includes(:images)
-  end
-
-  private
-
-  def set_category
-    @categories = Category.order(id:"ASC").where(ancestry:nil)
   end
 
 end
