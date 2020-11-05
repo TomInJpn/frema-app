@@ -2,7 +2,7 @@
 
 * Ruby version 2.5.1
 
-* Ruby on Rails 5.2.4.3
+* Ruby on Rails 5.2.4.4
 
 * Database 14.14 Distrib 5.6.47, for osx10.15
 
