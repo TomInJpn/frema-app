@@ -11,7 +11,7 @@ working_directory app_path
 # stderr_path "#{app_path}/shared/log/unicorn.stderr.log"
 # stdout_path "#{app_path}/shared/log/unicorn.stdout.log"
 pid "#{app_path}/tmp/pids/unicorn.pid"
-listen 3000
+listen "#{app_path}/tmp/sockets/unicorn.sock"
 stderr_path "#{app_path}/log/unicorn.stderr.log"
 stdout_path "#{app_path}/log/unicorn.stdout.log"
 
