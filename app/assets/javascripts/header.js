@@ -7,7 +7,7 @@ $(function(){
   $(".parents").on("mouseover","li>a",
     function(){
       if(!$(this).next("ul").length&&!$(this).parents(".grandchild").length){
-        let data= {parent_id:$(this).attr("id")};
+        let parent_data= {parent_id:$(this).attr("id")};
         let family="child";
         if(!$(this).parent(".parent").length){
           family="grandchild";
@@ -15,7 +15,7 @@ $(function(){
         $.ajax({
           type: "get",
           url: "/categories/ajax",
-          data: data,
+          data: parent_data,
           dataType: "json",
           context:this
         })
