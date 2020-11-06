@@ -4,6 +4,8 @@ set :application, "frema-app"
 
 set :repo_url, 'git@github.com:TomInJpn/frema-app.git'
 
+set :branch, 'main'
+
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
 
 set :rbenv_type, :user
