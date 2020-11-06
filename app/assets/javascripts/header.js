@@ -7,7 +7,7 @@ $(function(){
   $(".parents").on("mouseover","li>a",
     function(){
       if(!$(this).next("ul").length&&!$(this).parents(".grandchild").length){
-        let parent_data= {parent_id:$(this).attr("id")};
+        let parent_data={parent_id:$(this).attr("id")};
         let family="child";
         if(!$(this).parent(".parent").length){
           family="grandchild";
