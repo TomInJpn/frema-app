@@ -22,6 +22,9 @@ set :keep_releases, 3
 after 'deploy:publishing', 'deploy:restart'
 namespace :deploy do
   task :restart do
-    invoke 'unicorn:restart'
+    invoke 'unicorn:stop'
+    invoke 'unicorn:start'
   end
+  before :starting, 'deploy:upload'
+  after :finishing, 'deploy:cleanup'
 end
