@@ -11,7 +11,7 @@
         - if @card.name
           %label カード氏名
           .card--name= @card.name
-        =link_to "削除","/card/#{current_user.card.id}", method:"delete",class:"contents__right__body-btn"
+        =link_to "削除",card_path(current_user.card), method: :delete,class:"contents__right__body-btn"
     - else
       .contents__right__head
         %h3 クレジットカード情報入力
