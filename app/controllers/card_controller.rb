@@ -6,7 +6,7 @@ class CardController < ApplicationController
       customer = Payjp::Customer.retrieve(current_user.card.customer_id)
       @card = customer.cards.retrieve(current_user.card.card_id)
     else
-      gon.api_key = ENV["PAYJP_PUBLIC_KEY"]
+      @api_key = ENV["PAYJP_PUBLIC_KEY"]
     end
   end
 

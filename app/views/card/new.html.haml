@@ -41,7 +41,7 @@
 
 :javascript
 
-  if(typeof gon != 'undefined'){
+  if("#{@api_key}"){
 
     const style = {
       base: {
@@ -66,7 +66,7 @@
       }
     }
 
-    let payjp = Payjp(gon.api_key);
+    let payjp = Payjp("#{@api_key}");
     let elements = payjp.elements();
     let numberElement = elements.create('cardNumber', {style: stylenum});
     let expiryElement = elements.create('cardExpiry', {style: style});
