@@ -28,7 +28,7 @@
             = form_with url:item_payments_path,local:true,id:"new_form" do |f|
               %section.paymentQuantity
                 %span 購入数
-                = f.number_field :quantity,placeholder:"1〜#{@item.stock.to_s(:delimited)}",min:"1",max:"#{@item.stock}",step:"1",class:"content__detail_stock--input"
+                = f.number_field :quantity#,placeholder:"1〜#{@item.stock.to_s(:delimited)}",min:"1",max:"#{@item.stock}",step:"1",class:"content__detail_stock--input"
               .paymentPurchase
                 = f.submit "購入する",class:"paymentPurchase--button"
         - else
