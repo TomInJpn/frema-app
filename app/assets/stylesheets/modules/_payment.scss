@@ -60,6 +60,7 @@
     padding:0 !important;
     .card{
       display:flex;
+      flex-wrap:wrap;
       justify-content:space-between;
       width:100%;
       padding:10vw 5vw;
@@ -70,10 +71,16 @@
       &_num{
         font-size:5vw;
       }
+      &__err{
+        width:100%;
+        color:#ff0000;
+        text-align:right;
+      }
     }
   }
   &Quantity{
     display:flex;
+    flex-wrap: wrap;
     justify-content:space-between;
     padding:10vw 5vw;
     span{
@@ -85,6 +92,11 @@
       width:50%;
       height:12vw;
       margin:0 0 0 auto;
+      text-align:right;
+    }
+    p{
+      width:100%;
+      color:#ff0000;
       text-align:right;
     }
   }
