@@ -35,7 +35,12 @@ class PaymentsController < ApplicationController
       item.update!(stock: item.stock)
 
       redirect_to root_path
-    rescue Payjp::CardError
+    rescue
+      if charge&.id
+        Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+        charge = Payjp::Charge.retrieve(charge.id)
+        charge.refund
+      end
       redirect_to new_item_payment_path
     end
   end
