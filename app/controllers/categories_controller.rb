@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, except: [:ajax]
+  before_action :set_category, only: [:index,:show]
 
   def ajax
     @categories = Category.order(id:"ASC").find(params[:parent_id]).children
