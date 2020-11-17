@@ -20,7 +20,7 @@
         - if @card
           .card
             %span.card_type= "#{@card.brand.upcase}"
-            %span.card_num= "**** **** **** **** #{@card.last4}"
+            %span.card_num= "**** **** **** #{@card.last4}"
             - if @payjp_err
               %p.card__err 暫くお待ち頂くか、別のカードをお試し下さい
           .card_name= @card.name
