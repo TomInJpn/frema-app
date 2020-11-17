@@ -41,6 +41,7 @@
   * actionviewアップデート
   * EC2 amazon linux 2 へデプロイ
   * capistranoによるデプロイ自動化
+  * payments createアクションのトランザクションを実現
 
 ## usersテーブル
 |Column|Type|Options|
