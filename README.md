@@ -44,6 +44,7 @@
   * payments create にトランザクションを追加
   * payjp.jsを使用したカード登録欄に名義人を追加
   * card destroy にトランザクションを追加
+  * card destroy にpayjpデータの削除を追加
 
 ## usersテーブル
 |Column|Type|Options|
