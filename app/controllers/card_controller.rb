@@ -11,10 +11,11 @@ class CardController < ApplicationController
   end
 
   def create
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     if params["payjp-token"].blank?
+      @api_key = ENV["PAYJP_PUBLIC_KEY"]
       render :new
     else
+      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
       customer = Payjp::Customer.create(
         card: params["payjp-token"]
       )

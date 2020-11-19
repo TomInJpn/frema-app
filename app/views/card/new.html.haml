@@ -30,6 +30,10 @@
         %span.contents__right__body-require 必須
         #card__form--cvc-form.payjs-outer
 
+        %label 名義
+        %span.contents__right__body-require 必須
+        = f.text_field :name,id:"card__form--name",class:"payjs-outer"
+
         #card__form--errMessage
         = f.submit "登録する",id:"card__form--submit",class:"contents__right__body-btn"
 
@@ -46,6 +50,7 @@
     const style = {
       base: {
         backgroundColor:'#ffffff',
+        textAlign:'right',
         '::placeholder': {
           color: '#bbbbbb',
         }
@@ -57,6 +62,7 @@
     const stylenum = {
       base: {
         backgroundColor:'#ffffff',
+        textAlign:'center',
         '::placeholder': {
           color: '#ffffff',
         }
@@ -66,27 +72,26 @@
       }
     }
 
-    let payjp = Payjp("#{@api_key}");
-    let elements = payjp.elements();
+    let payjp         = Payjp("#{@api_key}");
+    let elements      = payjp.elements();
     let numberElement = elements.create('cardNumber', {style: stylenum});
     let expiryElement = elements.create('cardExpiry', {style: style});
-    let cvcElement = elements.create('cardCvc', {style: style});
+    let cvcElement    = elements.create('cardCvc', {style: style});
 
     numberElement.mount('#card__form--number-form');
     expiryElement.mount('#card__form--expiry-form');
     cvcElement.mount('#card__form--cvc-form');
 
-    $(".contents").on("click","#card__form--submit",
-      function(e){
-        e.preventDefault();
-        payjp.createToken(expiryElement).then(function(response){
-          if(response.error){
-            $('#card__form--errMessage').text(response.error.message);
-          }else{
-            $("#card__form--inputHidden").attr("value",response.id);
-            $("#card__form").submit();
-          }
-        });
-      }
-    );
+    $(".contents").on("click","#card__form--submit",function(e){
+      e.preventDefault();
+      console.log(numberElement._options);
+      payjp.createToken(numberElement,{card:{name:`${$("#card__form--name").val()}`}}).then(function(response){
+        if(response.error){
+          $('#card__form--errMessage').text(response.error.message);
+        }else{
+          $("#card__form--inputHidden").attr("value",response.id);
+          $("#card__form").submit();
+        }
+      });
+    });
   }
