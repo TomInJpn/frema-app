@@ -41,7 +41,9 @@
   * actionviewアップデート
   * EC2 amazon linux 2 へデプロイ
   * capistranoによるデプロイ自動化
-  * payments createアクションのトランザクションを実現
+  * payments create にトランザクションを追加
+  * payjp.jsを使用したカード登録欄に名義人を追加
+  * card destroy にトランザクションを追加
 
 ## usersテーブル
 |Column|Type|Options|
