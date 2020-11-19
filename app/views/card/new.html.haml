@@ -26,11 +26,11 @@
         %span.contents__right__body-require 必須
         #card__form--expiry-form.payjs-outer
 
-        %label セキリュティーコード
+        %label CVCコード
         %span.contents__right__body-require 必須
         #card__form--cvc-form.payjs-outer
 
-        %label 名義
+        %label カード名義
         %span.contents__right__body-require 必須
         = f.text_field :name,id:"card__form--name",class:"payjs-outer"
 
@@ -84,10 +84,14 @@
 
     $(".contents").on("click","#card__form--submit",function(e){
       e.preventDefault();
-      console.log(numberElement._options);
+
       payjp.createToken(numberElement,{card:{name:`${$("#card__form--name").val()}`}}).then(function(response){
         if(response.error){
           $('#card__form--errMessage').text(response.error.message);
+        }else if(!$("#card__form--name").val()){
+          $('#card__form--errMessage').text("カード名義をご入力下さい。");
+        }else if(!$("#card__form--name").val().match(/^[A-Z]+ [A-Z]+$/)){
+          $('#card__form--errMessage').text("カード名義のフォーマットが違います。");
         }else{
           $("#card__form--inputHidden").attr("value",response.id);
           $("#card__form").submit();

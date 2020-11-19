@@ -11,10 +11,7 @@ class CardController < ApplicationController
   end
 
   def create
-    if params["payjp-token"].blank?
-      @api_key = ENV["PAYJP_PUBLIC_KEY"]
-      render :new
-    else
+    if params["payjp-token"]
       Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
       customer = Payjp::Customer.create(
         card: params["payjp-token"]
@@ -29,13 +26,24 @@ class CardController < ApplicationController
       else
         render :new
       end
+    else
+      @api_key = ENV["PAYJP_PUBLIC_KEY"]
+      render :new
     end
   end
 
   def destroy
-    if Card.find(params[:id]).destroy
-      redirect_to new_card_path
+    begin
+      Card.find(params[:id]).destroy!
+      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+      customer = Payjp::Customer.retrieve(current_user.card.customer_id)
+      customer.delete
     end
+    redirect_to new_card_path
+
+    rescue => e
+      @err = e
+      render :new
   end
 
 end

@@ -71,6 +71,11 @@
       &_num{
         font-size:5vw;
       }
+      &_name{
+        width:100%;
+        font-size:5vw;
+        text-align:right;
+      }
       &__err{
         width:100%;
         color:#ff0000;
@@ -173,6 +178,9 @@
           font-size:20px;
         }
         &_num{
+          font-size:20px;
+        }
+        &_name{
           font-size:20px;
         }
       }
