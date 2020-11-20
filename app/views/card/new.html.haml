@@ -4,13 +4,19 @@
     - if current_user&.card
       .contents__right__head
         %h3 クレジットカード情報
+
       .contents__right__body
         .card--brand= @card.brand
         %label カード番号
         .card--num= "**** **** **** #{@card.last4}"
+
         - if @card.name
-          %label カード氏名
+          %label カード名義
           .card--name= @card.name
+
+        - if @err
+          .card_err "削除出来ませんでした"
+
         =link_to "削除",card_path(current_user.card), method: :delete,class:"contents__right__body-btn"
     - else
       .contents__right__head
@@ -33,6 +39,9 @@
         %label カード名義
         %span.contents__right__body-require 必須
         = f.text_field :name,id:"card__form--name",class:"payjs-outer"
+
+        - if @err
+          .card_err "暫く時間を置いてから再度お試し下さい"
 
         #card__form--errMessage
         = f.submit "登録する",id:"card__form--submit",class:"contents__right__body-btn"

@@ -1,5 +1,6 @@
 class CardController < ApplicationController
   before_action :authenticate_user!
+
   def new
     if current_user&.card
       Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
@@ -11,6 +12,7 @@ class CardController < ApplicationController
   end
 
   def create
+    @api_key = ENV["PAYJP_PUBLIC_KEY"]
     if params["payjp-token"]
       Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
       customer = Payjp::Customer.create(
@@ -27,23 +29,20 @@ class CardController < ApplicationController
         render :new
       end
     else
-      @api_key = ENV["PAYJP_PUBLIC_KEY"]
       render :new
     end
   end
 
   def destroy
-    begin
-      Card.find(params[:id]).destroy!
-      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-      customer = Payjp::Customer.retrieve(current_user.card.customer_id)
-      customer.delete
-    end
-    redirect_to new_card_path
-
-    rescue => e
-      @err = e
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    customer = Payjp::Customer.retrieve(current_user.card.customer_id)
+    @card = Card.find(params[:id])
+    if @card.destroy && customer.delete
+      redirect_to users_show_path(current_user)
+    else
+      @err="no_cardDelete"
       render :new
+    end
   end
 
 end
