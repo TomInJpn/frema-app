@@ -2,7 +2,7 @@
   %main
     %section
       %h2.registrationHeading 会員情報入力
-      = form_for(@user, url: user_registration_path) do |f|
+      = form_with model:@user, url:user_registration_path, id:'new_user', class:'new_user', local:true do |f|
         .registrationContent
           .formGroup
             = f.label :nickname,"ニックネーム"

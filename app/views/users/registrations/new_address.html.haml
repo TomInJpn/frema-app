@@ -2,7 +2,7 @@
   %main
     %section
       %h2.addressHeading 送付先情報入力
-      = form_for @address do |f|
+      = form_with model:@address, id:'new_address', class:'new_address', local:true do |f|
         .addressContent
           .formGroup.half
             %div
